@@ -19,7 +19,7 @@ function ensureCommentSchema(PDO $pdo)
     ensureCommentSchema($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $token = $_POST['csrf_token'] ?? '';
+    $token = extract_request_csrf() ?? '';
     if (!validate_csrf_token($token)) {
         header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? 'home.html'));
         exit;
