@@ -86,7 +86,7 @@ Tabele principale:
 ## ASISTENȚĂ AI
 - Autorul a folosit un asistent AI pentru pregătirea deploy-ului pe Railway și pentru debugging legat de rularea site-ului pe Railway.
 - O parte din textul paginilor a fost generată cu ajutorul AI.
-- AI a contribuit și la soluția de gestionare a avatarurilor pe Railway, în timp ce funcționalitatea a fost testată local de autor.
+- AI a contribuit și la soluția de gestionare a avatarurilor pe Railway, în timp ce funcționalitatea a fost testată și creată local de autor.
 - Implementarea principală, logica aplicației și structura de bază rămân responsabilitatea autorului.
 
 ## NOTĂ
