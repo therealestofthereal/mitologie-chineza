@@ -1,0 +1,2 @@
+[build]
+nixPackages = ["php82-pdo_mysql"]
