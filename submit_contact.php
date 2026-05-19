@@ -1,3 +1,4 @@
+require_once __DIR__ . "/db_config.php";
 <?php
 require_once __DIR__ . '/csrf.php';
 session_start();
@@ -10,7 +11,6 @@ if (!validate_csrf_token($token)) {
 }
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=contact_form;charset=utf8mb4', 'root', '', [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
 
