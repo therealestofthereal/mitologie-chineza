@@ -18,19 +18,18 @@ $total   = max(1, (int)($data['total'] ?? 1));
 $percent = (int)round($score / $total * 100);
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=site_users', 'root', '', [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]);
 
     // read current highscore
-    $stmt = $pdo->prepare("SELECT quiz_highscore FROM users WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT quiz_highscore FROM site_users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $current = (int)$stmt->fetchColumn();
 
     $isNew = $percent > $current;
 
     if ($isNew) {
-        $stmt = $pdo->prepare("UPDATE users SET quiz_highscore = ? WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE site_users SET quiz_highscore = ? WHERE id = ?");
         $stmt->execute([$percent, $_SESSION['user_id']]);
     }
 
