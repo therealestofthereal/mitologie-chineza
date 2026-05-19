@@ -1,6 +1,8 @@
-require_once __DIR__ . "/db_config.php";
 <?php
+
+require_once __DIR__ . "/db_config.php";
 session_start();
+
 header('Content-Type: text/html; charset=utf-8');
 
 $currentUserId   = $_SESSION['user_id'] ?? null;
