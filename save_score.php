@@ -22,14 +22,14 @@ require_once __DIR__ . '/db_config.php';
 try {
 
     // read current highscore
-    $stmt = $pdo->prepare("SELECT quiz_highscore FROM site_users.site_users WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT quiz_highscore FROM site_users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $current = (int)$stmt->fetchColumn();
 
     $isNew = $percent > $current;
 
     if ($isNew) {
-        $stmt = $pdo->prepare("UPDATE site_users.site_users SET quiz_highscore = ? WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE site_users SET quiz_highscore = ? WHERE id = ?");
         $stmt->execute([$percent, $_SESSION['user_id']]);
     }
 

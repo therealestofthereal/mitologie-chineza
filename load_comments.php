@@ -4,7 +4,7 @@ try {
 
     $page = isset($_GET['page']) ? $_GET['page'] : 'unknown'; 
 
-    $stmt = $pdo->prepare("SELECT name, message, submitted_at FROM site_comments.messages WHERE page = ? ORDER BY submitted_at DESC");
+    $stmt = $pdo->prepare("SELECT name, message, submitted_at FROM messages WHERE page = ? ORDER BY submitted_at DESC");
     $stmt->execute([$page]);
 
     echo '<div class="blog-comment">';

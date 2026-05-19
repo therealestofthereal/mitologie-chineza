@@ -10,7 +10,7 @@ require_once __DIR__ . '/db_config.php';
 try {
   $stmt = $pdo->query(
     "SELECT m.id, m.name, m.message, m.page, m.submitted_at, u.username AS account_name, u.email " .
-    "FROM site_comments.messages m LEFT JOIN site_users.site_users u ON m.user_id = u.id " .
+    "FROM messages m LEFT JOIN site_users u ON m.user_id = u.id " .
     "ORDER BY m.submitted_at DESC"
   );
     $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);

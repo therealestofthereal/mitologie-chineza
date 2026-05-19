@@ -20,7 +20,7 @@ try {
         exit;
     }
 
-    $stmt = $pdo->prepare("INSERT INTO site_comments.messages (name, email, message) VALUES (?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO messages (name, email, message) VALUES (?, ?, ?)");
     $stmt->execute([$name, $email, $message]);
 
     echo "Message sent successfully! Thank you for contacting us.";

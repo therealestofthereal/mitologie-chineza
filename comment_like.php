@@ -37,7 +37,7 @@ try {
         );
     }
 
-    $exists = $pdo->prepare("SELECT id FROM site_comments.messages WHERE id = ?");
+    $exists = $pdo->prepare("SELECT id FROM messages WHERE id = ?");
     $exists->execute([$commentId]);
     if (!$exists->fetch()) {
         echo json_encode(['success' => false, 'error' => 'Comentariu inexistent']);
@@ -45,19 +45,19 @@ try {
     }
 
     $liked = false;
-    $check = $pdo->prepare("SELECT id FROM site_comments.comment_likes WHERE comment_id = ? AND user_id = ?");
+    $check = $pdo->prepare("SELECT id FROM comment_likes WHERE comment_id = ? AND user_id = ?");
     $check->execute([$commentId, $userId]);
     if ($check->fetch()) {
-        $pdo->prepare("DELETE FROM site_comments.comment_likes WHERE comment_id = ? AND user_id = ?")->execute([$commentId, $userId]);
-        $pdo->prepare("UPDATE site_comments.messages SET like_count = GREATEST(like_count - 1, 0) WHERE id = ?")->execute([$commentId]);
+        $pdo->prepare("DELETE FROM comment_likes WHERE comment_id = ? AND user_id = ?")->execute([$commentId, $userId]);
+        $pdo->prepare("UPDATE messages SET like_count = GREATEST(like_count - 1, 0) WHERE id = ?")->execute([$commentId]);
         $liked = false;
     } else {
-        $pdo->prepare("INSERT INTO site_comments.comment_likes (comment_id, user_id) VALUES (?, ?)")->execute([$commentId, $userId]);
-        $pdo->prepare("UPDATE site_comments.messages SET like_count = like_count + 1 WHERE id = ?")->execute([$commentId]);
+        $pdo->prepare("INSERT INTO comment_likes (comment_id, user_id) VALUES (?, ?)")->execute([$commentId, $userId]);
+        $pdo->prepare("UPDATE messages SET like_count = like_count + 1 WHERE id = ?")->execute([$commentId]);
         $liked = true;
     }
 
-    $stmt = $pdo->prepare("SELECT like_count FROM site_comments.messages WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT like_count FROM messages WHERE id = ?");
     $stmt->execute([$commentId]);
     $likes = (int)$stmt->fetchColumn();
 

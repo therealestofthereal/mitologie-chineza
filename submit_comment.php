@@ -5,14 +5,14 @@ require_once __DIR__ . '/db_config.php';
 
 function ensureCommentSchema(PDO $pdo)
 {
-    $hasParent = $pdo->query("SHOW COLUMNS FROM site_comments.messages LIKE 'parent_id'")->fetch();
+    $hasParent = $pdo->query("SHOW COLUMNS FROM messages LIKE 'parent_id'")->fetch();
     if (!$hasParent) {
-        $pdo->exec("ALTER TABLE site_comments.messages ADD COLUMN parent_id INT DEFAULT NULL");
+        $pdo->exec("ALTER TABLE messages ADD COLUMN parent_id INT DEFAULT NULL");
     }
 
-    $hasLikeCount = $pdo->query("SHOW COLUMNS FROM site_comments.messages LIKE 'like_count'")->fetch();
+    $hasLikeCount = $pdo->query("SHOW COLUMNS FROM messages LIKE 'like_count'")->fetch();
     if (!$hasLikeCount) {
-        $pdo->exec("ALTER TABLE site_comments.messages ADD COLUMN like_count INT NOT NULL DEFAULT 0");
+        $pdo->exec("ALTER TABLE messages ADD COLUMN like_count INT NOT NULL DEFAULT 0");
     }
 }
 
@@ -42,14 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($parentId) {
-        $check = $pdo->prepare("SELECT id FROM site_comments.messages WHERE id = ? AND page = ?");
+        $check = $pdo->prepare("SELECT id FROM messages WHERE id = ? AND page = ?");
         $check->execute([$parentId, $page]);
         if (!$check->fetch()) {
             $parentId = null;
         }
     }
 
-    $stmt = $pdo->prepare("INSERT INTO site_comments.messages (name, message, page, user_id, parent_id, submitted_at) VALUES (?, ?, ?, ?, ?, NOW())");
+    $stmt = $pdo->prepare("INSERT INTO messages (name, message, page, user_id, parent_id, submitted_at) VALUES (?, ?, ?, ?, ?, NOW())");
     $stmt->execute([$name, $message, $page, $userId, $parentId]);
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit;
