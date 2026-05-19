@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Contact</title>
+<style>
+.contact-wrapper {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.contact-container {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+  animation: fadeIn 0.4s ease;
+}
+
+h1 {
+  text-align: center;
+  color: #982000;
+  border-style: double;
+  padding: 12px;
+  margin-bottom: 30px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.col {
+  flex: 1;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  transition: 0.25s;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: #982000;
+  box-shadow: 0 0 0 2px rgba(152, 32, 0, 0.15);
+  background: #fffdf9;
+}
+
+/* TEXTAREA */
+textarea.form-control {
+  resize: none;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #982000, #c0392b);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* small text */
+.contact-info {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* animation */
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(10px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* responsive */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+}
+</style></head>
+<body><main>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a class="active" href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guan Yu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+      <div style="padding:20px;margin-top:10px"></div>
+<div class="contact-wrapper">
+  <div class="contact-container">
+
+    <div class="contact-info">
+      Ai întrebări sau sugestii? Trimite-ne un mesaj și vom răspunde cât de curând posibil!
+    </div>
+
+    <form action="submit_contact.php" method="POST">
+      
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <input type="text" name="name" class="form-control" placeholder="Nume complet" required>
+          </div>
+          <div class="col">
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <textarea 
+          name="message" 
+          class="form-control" 
+          rows="8" 
+          placeholder="Scrie mesajul tău aici..." 
+          required></textarea>
+      </div>
+
+      <button type="submit">Trimite mesajul</button>
+    </form>
+
+  </div>
+</div></main>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+<script src="site.js"></script>
+</body>
+</html>

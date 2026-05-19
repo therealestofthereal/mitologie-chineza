@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Căutare</title>
+<style>
+.search-wrapper {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.search-container {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+}
+
+.search-container h1 {
+  text-align: center;
+  color: #982000;
+  border-style: double;
+  padding: 12px;
+  margin-bottom: 30px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border: 2px solid #982000;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+#searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(152, 32, 0, 0.2);
+}
+
+.search-btn {
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #982000, #c0392b);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.search-info {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.search-results {
+  display: none;
+}
+
+.search-results.active {
+  display: block;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #999;
+  font-size: 16px;
+}
+
+.result-item {
+  background: #fffdf9;
+  border-left: 4px solid #982000;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.result-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateX(5px);
+}
+
+.result-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #982000;
+  margin-bottom: 8px;
+}
+
+.result-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #982000, #c0392b);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.result-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(152, 32, 0, 0.3);
+}
+
+.result-description {
+  color: #555;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.search-count {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  background: #fffacd;
+  font-weight: bold;
+  color: #982000;
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guan Yu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="search-wrapper">
+  <div class="search-container">
+    <h1>Căutare Povești</h1>
+    
+    <form id="searchForm" class="search-box" onsubmit="return false;">
+      <input type="text" id="searchInput" placeholder="Caută o poveste... (ex: Sun Wukong, dragon, zodiac)">
+      <button type="button" class="search-btn">Căutare</button>
+    </form>
+
+    <div class="search-info">Caută după titlu, cuvinte cheie sau descriere</div>
+
+    <div id="searchResults" class="search-results"></div>
+  </div>
+</div>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+
+<script>
+const pageCache = new Map();
+let pageFetchPromise = null;
+
+function normalize(text) {
+  return String(text || '').toLowerCase();
+}
+
+function escapeRegExp(string) {
+  return String(string).replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
+}
+
+function splitToLines(text) {
+  return text
+    .replace(/\r/g, '')
+    .split(/\n|\.\s+|\?\s+|!\s+|;\s+|:\s+/)
+    .map(line => line.trim())
+    .filter(line => line.length > 0);
+}
+
+function highlightText(text, term) {
+  if (!text) return '';
+  const escaped = escapeRegExp(term);
+  return text.replace(new RegExp(`(${escaped})`, 'gi'), '<span class="highlight">$1</span>');
+}
+
+function scoreResult(result, term) {
+  const normalizedTerm = normalize(term);
+  const title = normalize(result.pageTitle);
+  const line = normalize(result.line);
+  let score = 0;
+
+  if (title.includes(normalizedTerm)) {
+    score += 150;
+    if (title.startsWith(normalizedTerm)) score += 50;
+  }
+
+  const matches = (line.match(new RegExp(escapeRegExp(normalizedTerm), 'gi')) || []).length;
+  score += matches * 20;
+
+  if (line.startsWith(normalizedTerm) || line.startsWith(normalizedTerm.charAt(0).toUpperCase() + normalizedTerm.slice(1))) {
+    score += 20;
+  }
+
+  if (line.length < 120) score += 10;
+
+  return score;
+}
+
+function parsePageText(html, pageTitle) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const htmlTitle = doc.querySelector('title') ? doc.querySelector('title').textContent.trim() : pageTitle;
+  const bodyText = doc.body ? doc.body.textContent || '' : '';
+  const normalizedBody = bodyText.replace(/\s+/g, ' ').trim();
+  return splitToLines(normalizedBody).map(line => ({ pageTitle: htmlTitle || pageTitle, line }));
+}
+
+function fetchAllPages() {
+  if (pageFetchPromise) return pageFetchPromise;
+
+  pageFetchPromise = fetch('page_list.php')
+    .then(resp => {
+      if (!resp.ok) throw new Error('Nu pot încărca lista de pagini.');
+      return resp.json();
+    })
+    .then(files => Promise.all(
+      files.map(page =>
+        fetch(page)
+          .then(resp => {
+            if (!resp.ok) throw new Error(`Eroare la încărcarea ${page}`);
+            return resp.text();
+          })
+          .then(html => {
+            const lines = parsePageText(html, page);
+            pageCache.set(page, { title: page, lines });
+          })
+          .catch(() => {
+            pageCache.set(page, { title: page, lines: [] });
+          })
+      )
+    ))
+    .then(() => pageCache);
+
+  return pageFetchPromise;
+}
+
+function renderResults(results, term) {
+  const resultsDiv = document.getElementById('searchResults');
+  if (results.length === 0) {
+    resultsDiv.innerHTML = `<div class="no-results">❌ Nu am găsit rezultate pentru "<strong>${term}</strong>". Încearcă un alt termen!</div>`;
+    resultsDiv.classList.add('active');
+    return;
+  }
+
+  const html = results.map(item => {
+    const snippet = highlightText(item.line, term);
+    return `
+      <div class="result-item">
+        <div class="result-title">${item.pageTitle}</div>
+        <div class="result-description">${snippet}</div>
+        <a href="${item.url}" class="result-link">Deschide pagina →</a>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('searchResults').innerHTML = `<div class="search-count">✓ Găsite ${results.length} rezultate:</div>${html}`;
+  document.getElementById('searchResults').classList.add('active');
+}
+
+function searchInCachedPages(term) {
+  const normalizedTerm = normalize(term);
+  const results = [];
+
+  pageCache.forEach((value, url) => {
+    const pageTitle = value.title;
+    value.lines.forEach(lineObj => {
+      const lineText = normalize(lineObj.line);
+      if (lineText.includes(normalizedTerm)) {
+        const result = {
+          pageTitle,
+          url,
+          line: lineObj.line,
+          score: scoreResult({ pageTitle, line: lineObj.line }, term)
+        };
+        results.push(result);
+      }
+    });
+  });
+
+  return results
+    .sort((a, b) => b.score - a.score || a.pageTitle.localeCompare(b.pageTitle))
+    .slice(0, 30);
+}
+
+function performSearch() {
+  const searchInput = document.getElementById('searchInput');
+  const searchTerm = normalize(searchInput.value.trim());
+  const resultsDiv = document.getElementById('searchResults');
+
+  if (!searchTerm) {
+    resultsDiv.classList.remove('active');
+    resultsDiv.innerHTML = '';
+    return;
+  }
+
+  if (pageCache.size === 0) {
+    resultsDiv.innerHTML = '<div class="no-results">Se încarcă indexul de pagini… Te rog să aștepți.</div>';
+    resultsDiv.classList.add('active');
+    fetchAllPages().then(() => {
+      const results = searchInCachedPages(searchTerm);
+      renderResults(results, searchTerm);
+    }).catch(() => {
+      resultsDiv.innerHTML = '<div class="no-results">Eroare la încărcarea paginilor. Încearcă din nou.</div>';
+      resultsDiv.classList.add('active');
+    });
+    return;
+  }
+
+  const results = searchInCachedPages(searchTerm);
+  renderResults(results, searchTerm);
+}
+
+const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.querySelector('.search-btn');
+
+if (searchForm) {
+  searchForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    performSearch();
+  });
+}
+
+if (searchBtn) {
+  searchBtn.addEventListener('click', performSearch);
+}
+
+if (searchInput) {
+  searchInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      event.preventDefault();
+      performSearch();
+    }
+  });
+
+  searchInput.addEventListener('input', function() {
+    if (this.value.trim() === '') {
+      document.getElementById('searchResults').classList.remove('active');
+      document.getElementById('searchResults').innerHTML = '';
+    }
+  });
+  searchInput.focus();
+}
+</script>
+
+<script src="site.js"></script>
+</body>
+</html>

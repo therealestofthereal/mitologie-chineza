@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Quiz</title>
+<style>
+  .quiz-shell {
+    max-width: 820px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+
+  .quiz-container {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+
+  .quiz-header {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(135deg, #fff8ef, #fff);
+  }
+
+  .quiz-title {
+    margin: 0 0 8px;
+    font-size: 28px;
+    font-family: "Times New Roman", Times, serif;
+    color: #982000;
+  }
+
+  .quiz-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 10px;
+    background: #eee;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #982000, #f1b232);
+    transition: width 0.35s ease;
+  }
+
+  .quiz-card {
+    padding: 24px;
+  }
+
+  .quiz-question-number {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 8px;
+  }
+
+  .quiz-question {
+    font-size: 22px;
+    line-height: 1.4;
+    margin: 0 0 18px;
+    color: #222;
+    font-weight: 700;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 10px;
+  }
+
+  .quiz-option {
+    width: 100%;
+    text-align: left;
+    padding: 13px 14px;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+    background: #fafafa;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-size: 16px;
+    color: #222;
+  }
+
+  .quiz-option:hover {
+    transform: translateY(-1px);
+    border-color: #cfa24d;
+    background: #fff7e6;
+  }
+
+  .quiz-option.selected {
+    border-color: #982000;
+    background: #fff1df;
+  }
+
+  .quiz-option.correct {
+    border-color: #2e7d32;
+    background: #e2f4e6;
+    color: #1b5e20;
+  }
+
+  .quiz-option.incorrect {
+    border-color: #c62828;
+    background: #fde2e2;
+    color: #8e1b1b;
+  }
+
+  .quiz-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .quiz-action-row {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .top-row,
+  .finalize-row {
+    justify-content: center;
+  }
+
+  .top-row .quiz-btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  .nav-row {
+    justify-content: space-between;
+  }
+
+  .quiz-btn.icon {
+    min-width: 38px;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quiz-btn.icon.primary {
+    min-width: 38px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .quiz-btn.icon.secondary {
+    min-width: 38px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .quiz-btn.icon.primary {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .quiz-btn.icon.secondary {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .quiz-btn {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+    min-width: 140px;
+  }
+
+  .quiz-btn.icon {
+    min-width: 46px;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quiz-btn.icon.primary {
+    min-width: 46px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .quiz-btn.icon.secondary {
+    min-width: 46px;
+    width: 46px;
+    height: 46px;
+  }
+
+  .quiz-btn.primary {
+    background: #982000;
+    color: white;
+  }
+
+  .quiz-btn.primary:hover {
+    background: #c0392b;
+  }
+
+  .quiz-btn.secondary {
+    background: #ececec;
+    color: #222;
+  }
+
+  .quiz-btn.secondary:hover {
+    background: #dedede;
+  }
+
+  .quiz-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .quiz-hint {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #777;
+  }
+
+  .quiz-result {
+    display: none;
+    padding: 24px;
+  }
+
+  .result-summary {
+    padding: 18px;
+    border-radius: 14px;
+    background: #f4e1c1;
+    margin-bottom: 18px;
+  }
+
+  .result-summary h2 {
+    margin: 0 0 8px;
+    color: #982000;
+  }
+
+  .review-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+  }
+
+  .review-item {
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid #e8e8e8;
+    background: #fafafa;
+  }
+
+  .review-item.correct {
+    background: #eef9f0;
+    border-color: #b7dfbf;
+  }
+
+  .review-item.incorrect {
+    background: #fff1f1;
+    border-color: #efb7b7;
+  }
+
+  .review-q {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #222;
+  }
+
+  .review-a {
+    margin-top: 6px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .review-a.correct-answer {
+    color: #1b7f3a;
+    font-weight: 700;
+  }
+
+  .review-a.wrong-answer {
+    color: #b42318;
+    font-weight: 700;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    animation: fadeIn 0.35s ease;
+  }
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a class="active" href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guan Yu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="quiz-shell">
+  <div class="quiz-container" id="quizApp">
+    <div class="quiz-header">
+      <h2 class="quiz-title">Quiz despre mitologia chineză</h2>
+      <div class="quiz-meta">
+        <span id="questionCounter">Întrebarea 1 din 7</span>
+        <span id="scorePreview">0 răspunsuri salvate</span>
+      </div>
+      <div class="progress-track" aria-label="Progres quiz">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="quiz-card" id="quizCard">
+      <div class="quiz-question-number" id="quizQuestionNumber"></div>
+      <div class="quiz-question" id="quizQuestionText"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+
+      <div class="quiz-actions">
+        <div class="quiz-action-row top-row">
+          <button class="quiz-btn primary" id="nextBtn" type="button">Următoarea</button>
+        </div>
+        <div class="quiz-action-row nav-row">
+          <button class="quiz-btn icon secondary" id="prevBtn" type="button" title="Înapoi">◀</button>
+          <button class="quiz-btn icon primary" id="finalizeBtn" type="button" title="Finalizează">✔</button>
+          <button class="quiz-btn icon secondary" id="skipBtn" type="button" title="Sari peste">⏭</button>
+        </div>
+      </div>
+
+      <div class="quiz-hint">Folosește butonul de skip pentru a trece la următoarea întrebare sau finalizează când vrei.</div>
+    </div>
+
+    <div class="quiz-result" id="quizResult"></div>
+  </div>
+</div>
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:serif">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+
+<script>
+const quiz = [
+  {
+    q: "Care este originea lui Sun Wukong?",
+    options: ["Dintr-un ou cosmic", "Dintr-o piatră magică", "Dintr-un copac sacru", "Dintr-o stea căzătoare"],
+    answer: 1
+  },
+  {
+    q: "Câte forme diferite poate lua Sun Wukong?",
+    options: ["12", "24", "72", "108"],
+    answer: 2
+  },
+  {
+    q: "Cine a fost discipolul lui Tang Sanzang?",
+    options: ["Chang'e", "Sun Wukong", "Huangdi", "Hou Yi"],
+    answer: 1
+  },
+  {
+    q: "Ce a făcut Chang'e pentru a deveni nemuritoare?",
+    options: ["A băut licoarea nemuririi", "A mâncat un fruct magic", "A meditat timp de 100 de ani", "A primit un inel magic"],
+    answer: 0
+  },
+  {
+    q: "Cine a tras în cele nouă sori pentru a salva lumea?",
+    options: ["Împăratul Galben", "Sun Wukong", "Hou Yi", "Chiyou"],
+    answer: 2
+  },
+  {
+    q: "Ce simbolizează dragonul chinezesc?",
+    options: ["Putere, noroc și protecție", "Frică și distrugere", "Iubire și compasiune", "Timp și eternitate"],
+    answer: 0
+  },
+  {
+    q: "Ce a introdus Huangdi în timpul domniei sale?",
+    options: ["Scrisul și busola", "Avioanele și trenurile", "Calendarul și medicina tradițională chineză", "A și C"],
+    answer: 3
+  },
+
+  {
+    q: "Din ce roman provine Sun Wukong?",
+    options: ["Legenda celor Nouă Sori", "Călătorie spre Vest", "Cronica Dragonului", "Cartea Lunii"],
+    answer: 1
+  },
+  {
+    q: "Cum se numește arma lui Sun Wukong?",
+    options: ["Sabia de Jad", "Ruyi Jingu Bang", "Arcul Cerului", "Lancea de Foc"],
+    answer: 1
+  },
+  {
+    q: "Cine a fost maestrul lui Sun Wukong?",
+    options: ["Subodhi", "Leizu", "Chiyou", "Tang Sanzang"],
+    answer: 0
+  },
+  {
+    q: "Cât timp a fost Sun Wukong închis sub un munte?",
+    options: ["50 de ani", "100 de ani", "500 de ani", "1000 de ani"],
+    answer: 2
+  },
+  {
+    q: "Cu cine pornește Sun Wukong în călătoria spre India?",
+    options: ["Cu Hou Yi", "Cu Tang Sanzang", "Cu Împăratul Galben", "Cu Leizu"],
+    answer: 1
+  },
+  {
+    q: "Ce reprezintă cel mai bine Sun Wukong?",
+    options: ["Ordine și disciplină", "Rebeliune, transformare și ingeniozitate", "Tăcere și izolare", "Bogăție și putere militară"],
+    answer: 1
+  },
+  {
+    q: "Care este numele chinez al lui Chang'e?",
+    options: ["黄帝", "后羿", "嫦娥", "生肖"],
+    answer: 2
+  },
+  {
+    q: "Unde locuiește Chang'e după ce devine nemuritoare?",
+    options: ["Pe muntele Huaguo", "În palatul împăratului", "Pe Lună", "În cerul de vest"],
+    answer: 2
+  },
+  {
+    q: "Cine o însoțește adesea pe Chang'e în legende?",
+    options: ["Iepurele de Jad", "Dragonul de Foc", "Maimuța de Aur", "Bouul Alb"],
+    answer: 0
+  },
+  {
+    q: "Ce festival o comemorează pe Chang'e?",
+    options: ["Festivalul Primăverii", "Festivalul Dragonului", "Festivalul de la Mijlocul Toamnei", "Festivalul Lanternelor"],
+    answer: 2
+  },
+  {
+    q: "Care este primul animal din zodiacul chinezesc?",
+    options: ["Bou", "Șobolan", "Tigru", "Iepure"],
+    answer: 1
+  },
+  {
+    q: "Câte animale are zodiacul chinezesc?",
+    options: ["10", "11", "12", "13"],
+    answer: 2
+  },
+  {
+    q: "Câte elemente fundamentale sunt folosite în zodiacul chinezesc?",
+    options: ["3", "4", "5", "6"],
+    answer: 2
+  },
+  {
+    q: "Cum este cunoscut Huangdi mai ales?",
+    options: ["Împăratul Verde", "Împăratul Alb", "Împăratul Galben", "Împăratul Cerului"],
+    answer: 2
+  },
+  {
+    q: "Ce a construit Huangdi, potrivit legendelor, pentru a ajuta societatea?",
+    options: ["Doar temple", "Drumuri și canale", "Piramide", "Turnuri de apărare maritime"],
+    answer: 1
+  }
+];
+  const state = {
+    current: 0,
+    answers: Array(quiz.length).fill(null),
+    locked: false
+  };
+
+  const quizCard = document.getElementById("quizCard");
+  const quizResult = document.getElementById("quizResult");
+  const quizQuestionNumber = document.getElementById("quizQuestionNumber");
+  const quizQuestionText = document.getElementById("quizQuestionText");
+  const quizOptions = document.getElementById("quizOptions");
+  const questionCounter = document.getElementById("questionCounter");
+  const scorePreview = document.getElementById("scorePreview");
+  const progressBar = document.getElementById("progressBar");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function updateHeader() {
+    questionCounter.textContent = `Întrebarea ${state.current + 1} din ${quiz.length}`;
+    const savedCount = state.answers.filter(a => a !== null).length;
+    scorePreview.textContent = `${savedCount} răspunsuri salvate`;
+    progressBar.style.width = `${(state.current / quiz.length) * 100}%`;
+    prevBtn.disabled = state.current === 0;
+    nextBtn.textContent = state.current === quiz.length - 1 ? "Vezi rezultatul" : "Următoarea";
+  }
+
+  function renderQuestion() {
+    if (state.locked) return;
+
+    const item = quiz[state.current];
+    quizQuestionNumber.textContent = `Întrebarea ${state.current + 1}`;
+    quizQuestionText.textContent = item.q;
+    quizOptions.innerHTML = "";
+
+    item.options.forEach((opt, index) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "quiz-option";
+      btn.textContent = `${String.fromCharCode(65 + index)}) ${opt}`;
+
+      if (state.answers[state.current] === index) {
+        btn.classList.add("selected");
+      }
+
+      btn.addEventListener("click", () => {
+        if (state.locked) return;
+        state.answers[state.current] = index;
+        renderQuestion();
+        updateHeader();
+      });
+
+      quizOptions.appendChild(btn);
+    });
+
+    updateHeader();
+  }
+
+  function goPrev() {
+    if (state.locked) return;
+    if (state.current > 0) {
+      state.current--;
+      renderQuestion();
+    }
+  }
+
+  function goNext() {
+    if (state.locked) return;
+
+    if (state.answers[state.current] === null) {
+      alert("Alege un răspuns înainte să continui.");
+      return;
+    }
+
+    if (state.current < quiz.length - 1) {
+      state.current++;
+      renderQuestion();
+      return;
+    }
+
+    showResult();
+  }
+
+  function goSkip() {
+    if (state.locked) return;
+    if (state.current < quiz.length - 1) {
+      state.current++;
+      renderQuestion();
+      return;
+    }
+
+    showResult();
+  }
+
+  function showResult() {
+    state.locked = true;
+    const score = state.answers.reduce((acc, ans, index) => {
+      return acc + (ans === quiz[index].answer ? 1 : 0);
+    }, 0);
+
+    progressBar.style.width = "100%";
+    quizCard.style.display = "none";
+    quizResult.style.display = "block";
+
+    let message = "";
+    const percent = Math.round(score / quiz.length * 100);
+    if (score === quiz.length) {
+      message = "🔥 Impecabil! Ești un adevărat expert al mitologiei chineze!";
+    } else if (score >= 19) {
+      message = "⭐ Excelent! Cunoștințe profunde. Remarcabil!";
+    } else if (score >= 16) {
+      message = "✅ Foarte bine. Ai o bună înțelegere a materialului.";
+    } else if (score >= 13) {
+      message = "📚 Decent. Ai cunoștințe de bază, dar mai sunt lacune.";
+    } else if (score >= 10) {
+      message = "⚠️ Sub așteptări. Trebuie mai mult studiu. Concentrează-te pe răspunsurile greșite.";
+    } else if (score >= 6) {
+      message = "❌ Slab. Cunoștințele tale sunt superficiale. Întoarce-te la lectură!";
+    } else {
+      message = "💔 Foarte slab. Este clar că nu ai studiază suficient. Reia de la capăt!";
+    }
+
+    const reviewHTML = quiz.map((item, index) => {
+      const selected = state.answers[index];
+      const correct = item.answer;
+      const isCorrect = selected === correct;
+
+      let selectedHTML = "";
+      if (selected === null) {
+        selectedHTML = `<div class="review-a">Răspunsul tău: <span class="incorrect">Nu ai ales un răspuns</span></div>`;
+      } else {
+        const selectedText = `${String.fromCharCode(65 + selected)}) ${item.options[selected]}`;
+        selectedHTML = `<div class="review-a ${isCorrect ? 'correct-answer' : 'wrong-answer'}">Răspunsul tău: ${selectedText}</div>`;
+      }
+
+      const correctText = `${String.fromCharCode(65 + correct)}) ${item.options[correct]}`;
+
+      return `
+        <div class="review-item ${isCorrect ? 'correct' : 'incorrect'}">
+          <div class="review-q">${index + 1}. ${item.q}</div>
+          ${selectedHTML}
+          <div class="review-a correct-answer">Răspuns corect: ${correctText}</div>
+        </div>
+      `;
+    }).join("");
+
+    quizResult.innerHTML = `
+      <div class="result-summary fade-in">
+        <h2>Rezultat final</h2>
+        <p>Ai obținut <b>${score}</b> din <b>${quiz.length}</b>.</p>
+        <p>${message}</p>
+        <button class="quiz-btn primary" type="button" onclick="restartQuiz()">Reia testul</button>
+      </div>
+      <div class="review-list fade-in">
+        ${reviewHTML}
+      </div>
+    `;
+
+    if (typeof window.saveQuizScore === 'function') {
+      window.saveQuizScore(score, quiz.length);
+    }
+  }
+
+  function restartQuiz() {
+    state.current = 0;
+    state.answers = Array(quiz.length).fill(null);
+    state.locked = false;
+    quizResult.style.display = "none";
+    quizResult.innerHTML = "";
+    quizCard.style.display = "block";
+    renderQuestion();
+  }
+
+  prevBtn.addEventListener("click", goPrev);
+  nextBtn.addEventListener("click", goNext);
+  const skipBtn = document.getElementById('skipBtn');
+  if (skipBtn) {
+    skipBtn.addEventListener("click", goSkip);
+  }
+  const finalizeBtn = document.getElementById('finalizeBtn');
+  if (finalizeBtn) {
+    finalizeBtn.addEventListener("click", showResult);
+  }
+
+  renderQuestion();
+</script>
+<script src="site.js"></script>
+
+</body>
+</html>

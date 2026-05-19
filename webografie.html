@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Webografie</title>
+<style>
+main {
+  flex: 1;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  text-align: center;
+  border-style: double;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+/* card */
+.web-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* titlu sectiune */
+.web-card h2 {
+  color: #982000;
+  margin-bottom: 15px;
+}
+
+/* link */
+.web-link {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.2s;
+  border-bottom: 1px solid #eee;
+}
+
+.web-link:hover {
+  background: #f1b232;
+  color: #111;
+  transform: translateX(3px);
+}
+
+/* footer */
+footer {
+  background: linear-gradient(to bottom, #a0260f, #8b1f08);
+  color: white;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 20px 20px;
+  font-size: 14px;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+footer p {
+  margin: 0;
+  color: white;
+  opacity: 0.9;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a class="active" href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guan Yu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<h1 class="page-title">Webografie</h1>
+
+<div class="web-card">
+  <h2>📚 Surse despre mitologie</h2>
+
+  <a class="web-link" href="https://www.britannica.com/topic/Huangdi" target="_blank">
+    Huangdi – Britannica
+  </a>
+
+  <a class="web-link" href="https://ro.wikipedia.org/wiki/Regele_Maimu%C8%9B%C4%83" target="_blank">
+    Sun Wukong – Wikipedia
+  </a>
+</div>
+
+<div class="web-card">
+  <h2>💻 Surse tehnice</h2>
+
+  <a class="web-link" href="https://www.w3schools.com/howto/howto_js_animate.asp" target="_blank">
+    Animații JavaScript
+  </a>
+
+  <a class="web-link" href="https://heliosanctus.fandom.com/wiki/Custom_HTML_Infobox" target="_blank">
+    Infobox HTML
+  </a>
+
+  <a class="web-link" href="https://formsubmit.co/documentation" target="_blank">
+    Formular contact
+  </a>
+
+  <a class="web-link" href="https://www.color-hex.com/color-palette/1006904" target="_blank">
+    Paletă culori
+  </a>
+
+  <a class="web-link" href="https://www.lipsum.com/feed/html" target="_blank">
+    Generator text
+  </a>
+</div>
+
+<div class="web-card">
+  <h2>🧠 Asistență și ajutor</h2>
+
+  <a class="web-link" href="https://gemini.google.com/" target="_blank">
+    Gemini
+  </a>
+
+  <a class="web-link" href="https://chatgpt.com/" target="_blank">
+    ChatGPT
+  </a>
+
+  <a class="web-link" href="https://stackoverflow.com" target="_blank">
+    StackOverflow
+  </a>
+
+</div>
+
+</main>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+<script src="site.js"></script>
+</body>
+</html>

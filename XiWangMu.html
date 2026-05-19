@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Xi Wang Mu</title>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guanyu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wiki-container">
+
+  <h1 class="wiki-title">Xi Wang Mu</h1>
+  <p class="wiki-subtitle">Regina Mamei din Vest</p>
+
+  <table class="infobox infobox-right">
+    <tr>
+      <th colspan="2" class="infobox-title">Xi Wang Mu</th>
+    </tr>
+    <tr>
+      <td colspan="2" class="infobox-image">
+        <img src="Images/XiWangMu-Dresden.JPG" class="popup-image">
+      </td>
+    </tr>
+    <tr><th>Nume chinez</th><td>西王母 (Xī Wáng Mǔ)</td></tr>
+    <tr><th>Titlu</th><td>Regina Mamă a Vestului</td></tr>
+    <tr><th>Domeniu</th><td>Nemurire, Occident</td></tr>
+    <tr><th>Simbol</th><td>Piersicile nemorții</td></tr>
+    <tr><th>Locul reședinței</th><td>Muntele Kunlun</td></tr>
+    <tr><th>Atribute</th><td>Înțelepciune, longevitate</td></tr>
+  </table>
+
+  <div class="wiki-content">
+    <p><b>Xi Wang Mu</b>, cunoscuta în limba engleză ca „Queen Mother of the West", este una dintre cele mai venerabile zeiţe din mitologia chineză. Este stăpâna regiunilor occidentale și păzitoare a secretelor nemuritorului.</p>
+
+    <h2>Originile și legendarele caise</h2>
+    <p>Conform tradițiilor antice, Xi Wang Mu locuiește în misteriosul Muntele Kunlun, situat dincolo de orizontul cunoscută. În grădina ei extraordinară cresc legendarii "Pomi ai Nemorții", iar fructele lor - piersicile sacre - acordă nemurire oricui le consumă. Se spune că aceste piersici cresc o dată la trei mii de ani, iar doar cei demni pot primi aceste fructe miracoloase.</p>
+
+    <h2>Rol în mitologie</h2>
+    <p>Xi Wang Mu nu este doar o zeiță pasivă; ea este o forță activă în cosmosul chinez. Ea este cunoscută ca fiind protectoare a Taoismului și ca fiind o învățătoare spirituală a unor oameni demni. Numeroase legende spun cum că doamna a primit vizite de la împărați și sfinți care căutau să obțină de la ea îndrumarea spirituală și secretele vieții eterne.</p>
+
+    <h2>Legatura cu Chang'e</h2>
+    <p>Într-una dintre cele mai cunoscute legende, Archer Yi a primit elixirul nemuritorului direct de la Xi Wang Mu. După moartea lui Yi, soția sa Chang'e a furat elixirul și a fugit pe lună. Unii susțin că aceasta a fost indirect dorința lui Xi Wang Mu, deoarece Chang'e era vrednica de imortalizare.</p>
+
+    <h2>Venerare și influență</h2>
+    <p>Xi Wang Mu a fost venerată timp de milenii în China, iar cultul ei s-a extins în toată Asia de Est. De-a lungul timpului, s-a contopit cu alte zeițe și divinități feminine, devenind o figură complexă care reprezintă sacrificiul, longevitatea și înțelepciunea. Ea este adesea înfățișată alături de alte zeițe și divinități în arta tradițională, purtând haine regale și o coroană de aur.
+
+    <h2>Comentarii</h2>
+    <form method="POST" action="submit_comment.php" class="wiki-comments">
+      <input type="hidden" name="page" value="xiWangMu">
+      <input type="text" name="name" placeholder="Nume" required>
+      <textarea name="message" placeholder="Scrie un comentariu..." required></textarea>
+      <button type="submit">Postează</button>
+    </form>
+    <div id="comments">Se încarcă...</div>
+  </div>
+</div>
+
+<script>
+fetch('display_comments.php?page=xiWangMu')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('comments').innerHTML = data;
+  })
+  .catch(() => {
+    document.getElementById('comments').innerHTML = 'Eroare la încărcare.';
+  });
+</script>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+
+<script>
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+lightbox.className = 'lightbox';
+lightbox.innerHTML = `
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+document.querySelectorAll('.gallery-img, .popup-image').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.style.display = "block";
+  });
+});
+
+document.querySelector('.close').addEventListener('click', () => {
+  lightbox.style.display = "none";
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
+});
+</script>
+
+<script src="script.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

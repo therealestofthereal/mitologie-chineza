@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Guanyu</title>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guanyu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wiki-container">
+
+  <h1 class="wiki-title">Guanyu</h1>
+  <p class="wiki-subtitle">Zeul războiului și loialității</p>
+
+  <table class="infobox infobox-right">
+    <tr>
+      <th colspan="2" class="infobox-title">Guanyu</th>
+    </tr>
+    <tr>
+      <td colspan="2" class="infobox-image">
+        <img src="Images/Guan_Yu_Seated_(Chinese_God_of_War),_Hokusai,_MET_56.121.6.jpg" class="popup-image">
+      </td>
+    </tr>
+    <tr><th>Nume chinez</th><td>關羽 (Guān Yǔ)</td></tr>
+    <tr><th>Titlu</th><td>Zeul Războiului</td></tr>
+    <tr><th>Perioada istorică</th><td>dinastiei Han târzie, perioada celor Trei Regate</td></tr>
+    <tr><th>Armă faimoasă</th><td>Green Dragon Crescent Blade (Halabarda lui)</td></tr>
+    <tr><th>Virtute principală</th><td>Loialitate și Dreptate</td></tr>
+    <tr><th>Venerare</th><td>Taoism, Confesiunea Ortodoxă</td></tr>
+  </table>
+
+  <div class="wiki-content">
+    <p><b>Guanyu</b> este una dintre cele mai importante divinități din mitologia și religia chineză, cunoscut ca Zeul Războiului și Simbolul Loialității. Deși a fost o persoană istorică din perioada Trei Regate, a fost divinizat în cultura și religia chineză datorită virtuților și faptelor sale memorabile.</p>
+
+    <h2>Viața și cariera militară</h2>
+    <p>Guanyu s-a născut la sfârșitul dinastiei Han și a fost un general renumit sub conducerea lui Liu Bei. A devenit faimos pentru abilități militare extraordinare, loialitate nestrămutatătoare și onoare. Între-una dintre cele mai faimoase bătălii, a fost capturat de dușmani, dar a refuzat cu fermitate să-l trădeze pe Liu Bei și a fost executat pentru refuzul lui.</p>
+
+    <h2>Transformarea în zeu</h2>
+    <p>După moartea sa, Guanyu a fost venerată ca un sfânt militar. Credința populară susține că spiritul lui a apărut în mai multe ocaziuni, apărând în lupte pentru a ajuta oasele lui Liu Bei. Treptat, a fost ridicat la statutul de zeu plin în pantheonul chinez și a devenit protector al soldaților, polițiștilor și oamenilor de afaceri care apreciază loialitatea și integritatea.</p>
+
+    <h2>Simboluri și atribute</h2>
+    <p>Guanyu este adesea descris părtând un costum roșu și verde, cu o barbă lungă și o expresie solemnă. Arma sa famoasa, Green Dragon Crescent Blade (o halabardă gigantică), este una dintre cele mai recunoscute obiecte din mitologia chineză. Culoarea roșie cu care este înfățișat simbolizează virtutea, curajul și dreptatea.</p>
+
+    <h2>Venerare în ziua de azi</h2>
+    <p>Templele dedicate lui Guanyu se găsesc în toată lumea, în special în comunitățile chineze. Credincioșii vin să-i ceara ajutorul, protecție și îndrumaresă în chestiuni de morală și onoare. Ziua lui Guanyu, 13 iunie, este marcată cu ceremonii și oferte în temple.</p>
+
+    <h2>Comentarii</h2>
+    <form method="POST" action="submit_comment.php" class="wiki-comments">
+      <input type="hidden" name="page" value="guanyu">
+      <input type="text" name="name" placeholder="Nume" required>
+      <textarea name="message" placeholder="Scrie un comentariu..." required></textarea>
+      <button type="submit">Postează</button>
+    </form>
+    <div id="comments">Se încarcă...</div>
+  </div>
+</div>
+
+<script>
+fetch('display_comments.php?page=guanyu')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('comments').innerHTML = data;
+  })
+  .catch(() => {
+    document.getElementById('comments').innerHTML = 'Eroare la încărcare.';
+  });
+</script>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+
+<script>
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+lightbox.className = 'lightbox';
+lightbox.innerHTML = `
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+document.querySelectorAll('.gallery-img, .popup-image').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.style.display = "block";
+  });
+});
+
+document.querySelector('.close').addEventListener('click', () => {
+  lightbox.style.display = "none";
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
+});
+</script>
+
+<script src="script.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

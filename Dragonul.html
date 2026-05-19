@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Dragonul</title>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a class="active" href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guan Yu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wiki-container">
+
+  <h1 class="wiki-title">Dragonul chinezesc</h1>
+  <p class="wiki-subtitle">Simbol al puterii, norocului și armoniei</p>
+
+  <!-- INFOBOX -->
+  <table class="infobox infobox-right">
+    <tr>
+      <th colspan="2" class="infobox-title">Dragonul chinezesc</th>
+    </tr>
+    <tr>
+      <td colspan="2" class="infobox-image">
+        <img src="Images/Chinese_Dragon_statue.jpg" class="popup-image">
+      </td>
+    </tr>
+
+    <tr><th>Tip</th><td>Creatură mitologică</td></tr>
+    <tr><th>Origine</th><td>Mitologia chineză</td></tr>
+    <tr><th>Element</th><td>Apă, ploaie, cer</td></tr>
+
+    <tr><th colspan="2" class="infobox-section">Caracteristici</th></tr>
+    <tr><th>Aspect</th><td>Corp de șarpe, solzi de pește</td></tr>
+    <tr><th>Simbolism</th><td>Putere, noroc, protecție</td></tr>
+    <tr><th>Rol</th><td>Protector, aducător de ploaie</td></tr>
+  </table>
+
+  <!-- CONTENT -->
+  <div class="wiki-content">
+
+    <p>
+      <b>Dragonul chinezesc</b> este una dintre cele mai importante și respectate creaturi din mitologia chineză.
+      Spre deosebire de dragonii occidentali, acesta nu este considerat o ființă malefică, ci un protector
+      și aducător de noroc, asociat cu apa, ploaia și fertilitatea.
+    </p>
+
+    <h2>Origini și legende</h2>
+    <p>
+      Originea dragonului chinezesc este strâns legată de triburile antice, care foloseau animale totemice
+      ca simboluri. De-a lungul timpului, aceste simboluri s-au combinat, rezultând creatura complexă cunoscută astăzi.
+    </p>
+
+    <p>
+      Dragonul este descris ca o combinație de mai multe animale:
+    </p>
+
+    <ul>
+      <li>Corp de șarpe</li>
+      <li>Solzi de pește</li>
+      <li>Coarne de cerb</li>
+      <li>Gheare de vultur</li>
+    </ul>
+
+    <h2>Rolul în cultură și tradiție</h2>
+    <p>
+      Dragonul apare frecvent în arhitectură, artă și festivaluri. Este asociat cu împăratul,
+      fiind considerat simbolul autorității supreme.
+    </p>
+
+    <p>
+      În cadrul festivalurilor, precum dansul dragonului, oamenii folosesc figurine uriașe pentru
+      a aduce noroc și prosperitate.
+    </p>
+
+    <h2>Simbolism</h2>
+    <ul>
+      <li>Putere și autoritate</li>
+      <li>Noroc și prosperitate</li>
+      <li>Protecție divină</li>
+      <li>Control asupra naturii</li>
+    </ul>
+
+    <h2>Impact cultural</h2>
+    <p>
+      Dragonul rămâne un simbol central al identității chineze, fiind prezent în literatură,
+      artă și cultura modernă. În astrologia chineză, anul dragonului este considerat cel mai norocos.
+    </p>
+
+    <h2>Comentarii</h2>
+
+<form method="POST" action="submit_comment.php" class="wiki-comments">
+    <input type="hidden" name="page" value="dragon"> 
+    <input type="text" name="name" placeholder="Nume" required>
+    <textarea name="message" placeholder="Scrie un comentariu..." required></textarea>
+    <button type="submit">Postează</button>
+</form>
+    <div id="comments">Se încarcă...</div>
+
+  </div>
+</div>
+
+<script>
+fetch('display_comments.php?page=dragon')  
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('comments').innerHTML = data;
+    })
+    .catch(() => {
+      document.getElementById('comments').innerHTML = 'Eroare la încărcare.';
+    });
+
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+lightbox.className = 'lightbox';
+lightbox.innerHTML = `
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+document.querySelectorAll('.gallery-img, .popup-image').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.style.display = "block";
+    lightbox.classList.add("fade-in");
+
+    setTimeout(() => {
+      lightbox.classList.remove("fade-in");
+    }, 400);
+  });
+});
+
+document.querySelector('.close').addEventListener('click', () => {
+  lightbox.style.display = "none";
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
+});
+</script>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+<script src="site.js"></script>
+</body>
+</html>

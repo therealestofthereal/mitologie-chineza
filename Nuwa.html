@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/x-icon" href="Images/favicon.ico">
+<title>Nuwa</title>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="home.html">Mitologia Chineză</a>
+
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="contact.html">Contact</a>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Povești ▾</a>
+        <div class="dropdown-content">
+          <a href="SunWukong.html">Sun Wukong</a>
+          <a href="Change.html">Chang'e & Hou Yi</a>
+          <a href="Dragonul.html">Dragonul</a>
+          <a href="Zodiacul.html">Zodiacul Chinez</a>
+          <a href="Galben.html">Împăratul Galben</a>
+          <a href="XiWangMu.html">Xi Wang Mu</a>
+          <a href="Guanyu.html">Guanyu</a>
+          <a href="Nuwa.html">Nuwa</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Altele ▾</a>
+        <div class="dropdown-content">
+          <a href="quiz.html">Quiz</a>
+          <a href="resurse.html">Resurse ext.</a>
+          <a href="search.html">Căutare</a>
+          <a href="FAQ.html">FAQ</a>
+        </div>
+      </div>
+      <a href="webografie.html">Webografie</a>
+      <a href="login.php" id="nav-login-link">Login</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wiki-container">
+
+  <h1 class="wiki-title">Nuwa</h1>
+  <p class="wiki-subtitle">Zeiță Creator și Reparatrice a Cerului</p>
+
+  <table class="infobox infobox-right">
+    <tr>
+      <th colspan="2" class="infobox-title">Nuwa</th>
+    </tr>
+    <tr>
+      <td colspan="2" class="infobox-image">
+        <img src="Images/Fuxi_and_Nüwa._National_Museum_of_Korea.jpg" class="popup-image">
+      </td>
+    </tr>
+    <tr><th>Nume chinez</th><td>女媧 (Nǚ Wā)</td></tr>
+    <tr><th>Titlu</th><td>Zeiță Creator</td></tr>
+    <tr><th>Simbol</th><td>Creația, Reparația</td></tr>
+    <tr><th>Formă</th><td>Ființă cu cap uman și coadă de șarpe</td></tr>
+    <tr><th>Realizări</th><td>Crearea omenirii, repararea cerului</td></tr>
+    <tr><th>Consort</th><td>Fuxi (în unele versiuni)</td></tr>
+  </table>
+
+  <div class="wiki-content">
+    <p><b>Nuwa</b> este una dintre cele mai vechi și mai importante divinități din mitologia chineză. Ea este considerată Creatoare a omenirii și Reparatrice a cerului dărâmat. Legenda sa se întinde peste mii de ani și rămâne o parte esențială a culturii chineze.</p>
+
+    <h2>Crearea omenirii</h2>
+    <p>Conform mitologiei, la începuturile lumii, Nuwa s-a găsit singură în pământul primordial. Simțind singurătatea, a decis să creeze fiare, iar apoi, mulțumită de creații, a hotarsat să creeze ființe care să-i asemene pe ea - oamenii. Legenda spune că Nuwa a modelat oamenii din pământ și le-a insuflat viață. În felul acesta, oamenii au căpătat forme și personalități diferite, așa cum Nuwa i-a făcut.</p>
+
+    <h2>Repararea cerului</h2>
+    <p>Între-o epocă de haos primordial, pilonii care susțineau cerul s-au rupt, iar cerul însăși s-a prăbușit. Aceasta a provocat o catastrofă teribilă - ape necontrolate au inundat pământul, iar focul a distrus totul. Zeița Nuwa, mișcată de grijă pentru creațiile sale - oamenii - s-a ridicat și a reușit să repareze cerul folosind pietre colorate speciale. A tăiat picioarele unei broasce țestoase gigante și le-a folosit ca suporturi noi pentru cer. Prin devoțiunea și puterea ei, a restabilit ordinea în univers.</p>
+
+    <h2>Reprezentare și Simbolism</h2>
+    <p>Nuwa este adesea înfățișată cu o formă unică - cap uman și coadă de șarpe. Aceasta este considerată o reprezentare a unității și echilibrului cosmic. În unele imagini, ea ține în mână o busolă sau hartă cosmică, reprezentand controlul ei asupra universului. Culoarea roșie și aurie în care este adesea pictată simbolizează energia vitală și divinitatea.</p>
+
+    <h2>Moștenirea și venerare</h2>
+    <p>Nuwa rămâne una dintre cele mai veneratele zeițe în China și în culturile din Asia de Est. Templele dedicate ei găzduiesc mii de credincioși care vin să-și exprime gratitudine și respect. Ea este simbolul creativității, regenerarii și al capacității de a depăși orice obstacol - o inspirație atemporala pentru orice ființă care se confruntă cu greutatăți.</p>
+
+    <h2>Comentarii</h2>
+    <form method="POST" action="submit_comment.php" class="wiki-comments">
+      <input type="hidden" name="page" value="nuwa">
+      <input type="text" name="name" placeholder="Nume" required>
+      <textarea name="message" placeholder="Scrie un comentariu..." required></textarea>
+      <button type="submit">Postează</button>
+    </form>
+    <div id="comments">Se încarcă...</div>
+  </div>
+</div>
+
+<script>
+fetch('display_comments.php?page=nuwa')
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById('comments').innerHTML = data;
+  })
+  .catch(() => {
+    document.getElementById('comments').innerHTML = 'Eroare la încărcare.';
+  });
+</script>
+
+<div class="sticky">
+    <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
+</div>
+<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
+
+<script>
+const lightbox = document.createElement('div');
+lightbox.id = 'lightbox';
+lightbox.className = 'lightbox';
+lightbox.innerHTML = `
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+`;
+document.body.appendChild(lightbox);
+
+const lightboxImg = document.getElementById("lightbox-img");
+
+document.querySelectorAll('.gallery-img, .popup-image').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.style.display = "block";
+  });
+});
+
+document.querySelector('.close').addEventListener('click', () => {
+  lightbox.style.display = "none";
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
+});
+</script>
+
+<script src="script.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
