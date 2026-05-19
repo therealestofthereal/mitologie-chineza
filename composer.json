@@ -1,0 +1,7 @@
+{
+    "name": "mitologie-chineza/app",
+    "description": "Mitologie Chineza",
+    "require": {
+        "php": "^8.0"
+    }
+}
