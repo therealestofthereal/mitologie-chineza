@@ -27,7 +27,7 @@ if (!$id || $text === '') {
 
 try {
     // verify comment exists and belongs to user
-    $stmt = $pdo->prepare("SELECT user_id FROM messages WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT user_id FROM site_comments.messages WHERE id = ?");
     $stmt->execute([$id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -36,7 +36,7 @@ try {
         exit;
     }
 
-    $stmt = $pdo->prepare("UPDATE messages SET message = ?, edited_at = NOW() WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE site_comments.messages SET message = ?, edited_at = NOW() WHERE id = ?");
     $stmt->execute([$text, $id]);
 
     echo json_encode([

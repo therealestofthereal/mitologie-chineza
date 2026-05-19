@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 require_once __DIR__ . '/db_config.php';
 $pdoU = $pdo;
 $pdoC = $pdo;
-$stmt = $pdoU->prepare("SELECT username, email, profile_pic, quiz_highscore, created_at FROM site_users WHERE id = ?");
+$stmt = $pdoU->prepare("SELECT username, email, profile_pic, quiz_highscore, created_at FROM site_users.site_users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -17,7 +17,7 @@ if (!$user) { session_destroy(); header('Location: login.php'); exit; }
 
 // fetch recent comments from the site comments db
 $stmtC = $pdoC->prepare(
-    "SELECT page, message, submitted_at FROM messages WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 5"
+  "SELECT page, message, submitted_at FROM site_comments.messages WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 5"
 );
 $stmtC->execute([$_SESSION['user_id']]);
 $recentComments = $stmtC->fetchAll(PDO::FETCH_ASSOC);

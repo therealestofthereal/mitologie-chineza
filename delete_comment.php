@@ -25,7 +25,7 @@ if (!$id) {
 }
 
 try {
-    $stmt = $pdo->prepare("DELETE FROM messages WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM site_comments.messages WHERE id = ?");
     $stmt->execute([$id]);
 
     echo json_encode(['success' => true]);

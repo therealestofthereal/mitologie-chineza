@@ -14,7 +14,7 @@ if (empty($_SESSION['user_id'])) {
 }
 
 try {
-    $query = "SELECT username, profile_pic, role FROM site_users WHERE id = ?";
+    $query = "SELECT username, profile_pic, role FROM site_users.site_users WHERE id = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ try {
     ];
 } catch (PDOException $e) {
     try {
-        $stmt = $pdo->prepare("SELECT username, profile_pic FROM site_users WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT username, profile_pic FROM site_users.site_users WHERE id = ?");
         $stmt->execute([$_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {

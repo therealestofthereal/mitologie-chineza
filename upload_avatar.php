@@ -123,7 +123,7 @@ if (extension_loaded('gd')) {
 
 // update db
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ? WHERE id = ?");
+$stmt = $pdo->prepare("UPDATE site_users.site_users SET profile_pic = ? WHERE id = ?");
 $stmt->execute([$filename, $_SESSION['user_id']]);
 
 $_SESSION['profile_pic'] = $filename;

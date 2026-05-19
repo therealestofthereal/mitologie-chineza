@@ -28,7 +28,7 @@ if ($action === 'register') {
     }
 
     // check dupes
-    $stmt = $pdo->prepare("SELECT id FROM site_users WHERE username = ? OR email = ?");
+    $stmt = $pdo->prepare("SELECT id FROM site_users.site_users WHERE username = ? OR email = ?");
     $stmt->execute([$username, $email]);
     if ($stmt->fetch()) {
         header('Location: login.php?error=Username+sau+email+deja+folosit&tab=register');
@@ -36,7 +36,7 @@ if ($action === 'register') {
     }
 
     $hash = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $pdo->prepare("INSERT INTO site_users (username, email, password) VALUES (?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO site_users.site_users (username, email, password) VALUES (?, ?, ?)");
     $stmt->execute([$username, $email, $hash]);
 
     $_SESSION['user_id']     = $pdo->lastInsertId();
@@ -57,7 +57,7 @@ if ($action === 'register') {
 
     $stmt = $pdo->prepare(
         "SELECT id, username, password, COALESCE(profile_pic, '') AS profile_pic, " .
-        "COALESCE(role, 'user') AS role FROM site_users WHERE username = ? OR email = ?"
+        "COALESCE(role, 'user') AS role FROM site_users.site_users WHERE username = ? OR email = ?"
     );
     $stmt->execute([$username, $username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
