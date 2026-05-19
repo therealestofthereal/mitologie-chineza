@@ -14,7 +14,7 @@ if (empty($_SESSION['user_id'])) {
 }
 
 try {
-    $query = "SELECT username, profile_pic, role FROM site_users WHERE id = ?";
+    $query = "SELECT id, username, profile_pic, profile_blob, profile_blob_mime, role FROM site_users WHERE id = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -24,22 +24,38 @@ try {
         exit;
     }
 
+    $avatar = 'Images/default_avatar.svg';
+    if (!empty($user['profile_blob'])) {
+        $mime = !empty($user['profile_blob_mime']) ? $user['profile_blob_mime'] : 'image/png';
+        $avatar = 'data:' . $mime . ';base64,' . base64_encode($user['profile_blob']);
+    } elseif (!empty($user['profile_pic'])) {
+        $avatar = 'avatar.php?user_id=' . (int)$user['id'];
+    }
+
     $response = [
         'loggedIn' => true,
         'username' => $user['username'],
-        'avatar'   => !empty($user['id']) ? 'avatar.php?user_id=' . (int)$user['id'] : 'Images/default_avatar.svg',
+        'avatar'   => $avatar,
         'role'     => !empty($user['role']) ? $user['role'] : 'user',
     ];
 } catch (PDOException $e) {
     try {
-        $stmt = $pdo->prepare("SELECT username, profile_pic FROM site_users WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT id, username, profile_pic, profile_blob, profile_blob_mime FROM site_users WHERE id = ?");
         $stmt->execute([$_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
+            $avatar = 'Images/default_avatar.svg';
+            if (!empty($user['profile_blob'])) {
+                $mime = !empty($user['profile_blob_mime']) ? $user['profile_blob_mime'] : 'image/png';
+                $avatar = 'data:' . $mime . ';base64,' . base64_encode($user['profile_blob']);
+            } elseif (!empty($user['profile_pic'])) {
+                $avatar = 'avatar.php?user_id=' . (int)$user['id'];
+            }
+
             $response = [
                 'loggedIn' => true,
                 'username' => $user['username'],
-                'avatar'   => !empty($_SESSION['user_id']) ? 'avatar.php?user_id=' . (int)$_SESSION['user_id'] : 'Images/default_avatar.svg',
+                'avatar'   => $avatar,
                 'role'     => 'user',
             ];
         }
