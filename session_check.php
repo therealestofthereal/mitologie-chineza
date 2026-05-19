@@ -12,11 +12,10 @@ if (empty($_SESSION['user_id'])) {
 }
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=site_users', 'root', '', [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
 
-    $query = "SELECT username, profile_pic, role FROM users WHERE id = ?";
+    $query = "SELECT username, profile_pic, role FROM site_users WHERE id = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -36,10 +35,9 @@ try {
     ];
 } catch (PDOException $e) {
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=site_users', 'root', '', [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ]);
-        $stmt = $pdo->prepare("SELECT username, profile_pic FROM users WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT username, profile_pic FROM site_users WHERE id = ?");
         $stmt->execute([$_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($user) {
