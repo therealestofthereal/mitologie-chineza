@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once __DIR__ . '/csrf.php';
+?>
+
+<!DOCTYPE html>
+<html>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
