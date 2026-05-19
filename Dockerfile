@@ -1,12 +1,10 @@
-FROM dunglas/frankenphp:php8.2.31-bookworm
+FROM php:8.2-apache
 
-RUN apt-get update && apt-get install -y \
-    php8.2-mysql \
-    && rm -rf /var/lib/apt/lists/*
+RUN docker-php-ext-install pdo pdo_mysql
 
-WORKDIR /app
+WORKDIR /var/www/html
 COPY . .
 
-EXPOSE 8080
+EXPOSE 80
 
-CMD ["php", "-S", "0.0.0.0:8080"]
+CMD ["apache2-foreground"]
