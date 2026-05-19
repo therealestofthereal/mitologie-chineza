@@ -1,5 +1,5 @@
-require_once __DIR__ . "/db_config.php";
 <?php
+require_once __DIR__ . '/db_config.php';
 session_start();
 header('Content-Type: text/html; charset=utf-8');
 
@@ -147,9 +147,6 @@ function renderCommentRow(array $row, array $children, int $depth = 0, bool $sho
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    ]);
-
     ensureCommentSchema($pdo);
 
     if (!$page) {

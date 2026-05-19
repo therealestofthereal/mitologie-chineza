@@ -5,11 +5,10 @@ if (empty($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
     exit;
 }
 
-try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    ]);
+require_once __DIR__ . '/db_config.php';
 
-    $stmt = $pdo->query(
+try {
+  $stmt = $pdo->query(
         "SELECT m.id, m.name, m.message, m.page, m.submitted_at, u.username AS account_name, u.email " .
         "FROM messages m LEFT JOIN site_users u ON m.user_id = u.id " .
         "ORDER BY m.submitted_at DESC"

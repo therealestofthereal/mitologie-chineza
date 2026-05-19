@@ -14,6 +14,8 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
     exit;
 }
 
+require_once __DIR__ . '/db_config.php';
+
 $data = json_decode(file_get_contents('php://input'), true);
 $id   = (int)($data['id'] ?? 0);
 
@@ -23,9 +25,6 @@ if (!$id) {
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
-
     $stmt = $pdo->prepare("DELETE FROM messages WHERE id = ?");
     $stmt->execute([$id]);
 

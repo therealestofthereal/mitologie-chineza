@@ -9,6 +9,7 @@ if (!$userId) {
 }
 $input = json_decode(file_get_contents('php://input'), true);
 require_once __DIR__ . '/csrf.php';
+require_once __DIR__ . '/db_config.php';
 $token = extract_request_csrf();
 if (!validate_csrf_token($token)) {
     echo json_encode(['success' => false, 'error' => 'invalid_csrf']);
@@ -21,9 +22,6 @@ if (!$commentId) {
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    ]);
-
     $hasLikesTable = $pdo->query("SHOW TABLES LIKE 'comment_likes'")->fetch();
     if (!$hasLikesTable) {
         $pdo->exec(

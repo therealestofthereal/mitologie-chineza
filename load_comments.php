@@ -1,7 +1,6 @@
 <?php
+require_once __DIR__ . '/db_config.php';
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
 
     $page = isset($_GET['page']) ? $_GET['page'] : 'unknown'; 
 

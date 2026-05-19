@@ -1,5 +1,5 @@
-require_once __DIR__ . "/db_config.php";
 <?php
+require_once __DIR__ . '/db_config.php';
 require_once __DIR__ . '/csrf.php';
 session_start();
 
@@ -11,9 +11,6 @@ if (!validate_csrf_token($token)) {
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    ]);
-
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $message = trim($_POST['message'] ?? '');

@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
+require_once __DIR__ . '/db_config.php';
 
 $errors = [
     UPLOAD_ERR_INI_SIZE   => 'Fișierul depășește limita serverului.',
@@ -121,8 +122,7 @@ if (extension_loaded('gd')) {
 }
 
 // update db
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ? WHERE id = ?");
 $stmt->execute([$filename, $_SESSION['user_id']]);
 

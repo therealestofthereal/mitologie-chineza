@@ -167,9 +167,6 @@ function renderCommentRow(array $row, array $children, int $depth = 0, bool $sho
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    ]);
-
     ensureCommentSchema($pdo);
 
     $stmt = $pdo->prepare(

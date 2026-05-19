@@ -18,8 +18,8 @@ $total   = max(1, (int)($data['total'] ?? 1));
 $percent = (int)round($score / $total * 100);
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
+require_once __DIR__ . '/db_config.php';
+try {
 
     // read current highscore
     $stmt = $pdo->prepare("SELECT quiz_highscore FROM site_users WHERE id = ?");

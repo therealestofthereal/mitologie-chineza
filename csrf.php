@@ -1,5 +1,9 @@
 <?php 
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 function generate_csrf_token()
 {
     if (empty($_SESSION['csrf_token'])) {

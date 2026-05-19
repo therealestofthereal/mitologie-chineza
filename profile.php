@@ -6,8 +6,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // fetch user info from the site users db
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
+require_once __DIR__ . '/db_config.php';
+$pdoU = $pdo;
+$pdoC = $pdo;
 $stmt = $pdoU->prepare("SELECT username, email, profile_pic, quiz_highscore, created_at FROM site_users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -15,8 +16,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$user) { session_destroy(); header('Location: login.php'); exit; }
 
 // fetch recent comments from the site comments db
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
 $stmtC = $pdoC->prepare(
     "SELECT page, message, submitted_at FROM messages WHERE user_id = ? ORDER BY submitted_at DESC LIMIT 5"
 );

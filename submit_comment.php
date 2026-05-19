@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/csrf.php';
+require_once __DIR__ . '/db_config.php';
 
 function ensureCommentSchema(PDO $pdo)
 {
@@ -15,9 +16,7 @@ function ensureCommentSchema(PDO $pdo)
     }
 }
 
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
-ensureCommentSchema($pdo);
+    ensureCommentSchema($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $token = $_POST['csrf_token'] ?? '';

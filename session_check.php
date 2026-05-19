@@ -2,6 +2,8 @@
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 
+require_once __DIR__ . '/db_config.php';
+
 $response = [
     'loggedIn' => false,
 ];
@@ -12,9 +14,6 @@ if (empty($_SESSION['user_id'])) {
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    ]);
-
     $query = "SELECT username, profile_pic, role FROM site_users WHERE id = ?";
     $stmt = $pdo->prepare($query);
     $stmt->execute([$_SESSION['user_id']]);
@@ -35,8 +34,6 @@ try {
     ];
 } catch (PDOException $e) {
     try {
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        ]);
         $stmt = $pdo->prepare("SELECT username, profile_pic FROM site_users WHERE id = ?");
         $stmt->execute([$_SESSION['user_id']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);

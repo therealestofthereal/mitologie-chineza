@@ -14,6 +14,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+require_once __DIR__ . '/db_config.php';
+
 $data = json_decode(file_get_contents('php://input'), true);
 $id   = (int)($data['id']   ?? 0);
 $text = trim($data['text']  ?? '');
@@ -24,8 +26,6 @@ if (!$id || $text === '') {
 }
 
 try {
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]);
     // verify comment exists and belongs to user
     $stmt = $pdo->prepare("SELECT user_id FROM messages WHERE id = ?");
     $stmt->execute([$id]);
