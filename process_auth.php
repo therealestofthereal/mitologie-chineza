@@ -1,11 +1,10 @@
 <?php
 session_start();
 require 'db_config.php';
-
 require_once __DIR__ . '/csrf.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $token = $_POST['csrf_token'] ?? '';
+    $token = extract_request_csrf() ?? '';
     if (!validate_csrf_token($token)) {
         header('Location: login.php?error=Invalid+request');
         exit;
