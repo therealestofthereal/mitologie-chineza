@@ -1,4 +1,3 @@
-require_once __DIR__ . "/db_config.php";
 <?php
 session_start();
 header('Content-Type: text/html; charset=utf-8');
@@ -18,14 +17,14 @@ if (!$commentId) {
 
 function ensureCommentSchema(PDO $pdo)
 {
-    $hasParent = $pdo->query("SHOW COLUMNS FROM messages LIKE 'parent_id'")->fetch();
+    $hasParent = $pdo->query("SHOW COLUMNS FROM site_comments.messages LIKE 'parent_id'")->fetch();
     if (!$hasParent) {
-        $pdo->exec("ALTER TABLE messages ADD COLUMN parent_id INT DEFAULT NULL");
+        $pdo->exec("ALTER TABLE site_comments.messages ADD COLUMN parent_id INT DEFAULT NULL");
     }
 
-    $hasLikeCount = $pdo->query("SHOW COLUMNS FROM messages LIKE 'like_count'")->fetch();
+    $hasLikeCount = $pdo->query("SHOW COLUMNS FROM site_comments.messages LIKE 'like_count'")->fetch();
     if (!$hasLikeCount) {
-        $pdo->exec("ALTER TABLE messages ADD COLUMN like_count INT NOT NULL DEFAULT 0");
+        $pdo->exec("ALTER TABLE site_comments.messages ADD COLUMN like_count INT NOT NULL DEFAULT 0");
     }
 
     $hasLikesTable = $pdo->query("SHOW TABLES FROM site_comments LIKE 'comment_likes'")->fetch();
@@ -39,7 +38,7 @@ function ensureCommentSchema(PDO $pdo)
                 UNIQUE KEY comment_user (comment_id, user_id),
                 INDEX idx_comment_id (comment_id),
                 INDEX idx_user_id (user_id),
-                FOREIGN KEY (comment_id) REFERENCES messages(id) ON DELETE CASCADE
+                FOREIGN KEY (comment_id) REFERENCES site_comments.messages(id) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
         );
     }
@@ -147,13 +146,14 @@ function renderCommentRow(array $row, array $children, int $depth = 0, bool $sho
 }
 
 try {
+    $pdo = new PDO('mysql:host=localhost;charset=utf8', 'root', '', [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
 
     ensureCommentSchema($pdo);
 
     if (!$page) {
-        $pageStmt = $pdo->prepare('SELECT page FROM messages WHERE id = ?');
+        $pageStmt = $pdo->prepare('SELECT page FROM site_comments.messages WHERE id = ?');
         $pageStmt->execute([$commentId]);
         $page = $pageStmt->fetchColumn() ?: 'unknown';
     }
@@ -162,8 +162,8 @@ try {
         "SELECT m.id, m.name, m.message, m.page, m.submitted_at, m.user_id, m.edited_at,
                 m.parent_id, COALESCE(m.like_count, 0) AS like_count, u.profile_pic,
                 IF(cl.user_id IS NULL, 0, 1) AS liked_by_user
-         FROM messages m
-         LEFT JOIN site_users u ON m.user_id = u.id
+         FROM site_comments.messages m
+         LEFT JOIN site_users.users u ON m.user_id = u.id
          LEFT JOIN site_comments.comment_likes cl ON cl.comment_id = m.id AND cl.user_id = ?
          WHERE m.page = ?"
     );

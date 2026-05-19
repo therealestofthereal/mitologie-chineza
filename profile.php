@@ -6,15 +6,17 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // fetch user info from the site users db
+$pdoU = new PDO('mysql:host=localhost;dbname=site_users', 'root', '', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
-$stmt = $pdoU->prepare("SELECT username, email, profile_pic, quiz_highscore, created_at FROM site_users WHERE id = ?");
+$stmt = $pdoU->prepare("SELECT username, email, profile_pic, quiz_highscore, created_at FROM users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) { session_destroy(); header('Location: login.php'); exit; }
 
 // fetch recent comments from the site comments db
+$pdoC = new PDO('mysql:host=localhost;dbname=site_comments', 'root', '', [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ]);
 $stmtC = $pdoC->prepare(
