@@ -22,9 +22,7 @@ $stmtC = $pdoC->prepare(
 $stmtC->execute([$_SESSION['user_id']]);
 $recentComments = $stmtC->fetchAll(PDO::FETCH_ASSOC);
 
-$avatar    = !empty($user['profile_pic'])
-             ? 'uploads/avatars/' . htmlspecialchars($user['profile_pic'])
-             : 'Images/default_avatar.svg';
+$avatar    = 'avatar.php?user_id=' . (int)$_SESSION['user_id'];
 $highscore = (int)$user['quiz_highscore'];
 $joined    = date('d M Y', strtotime($user['created_at']));
 

@@ -27,9 +27,7 @@ try {
     $response = [
         'loggedIn' => true,
         'username' => $user['username'],
-        'avatar'   => !empty($user['profile_pic'])
-            ? 'uploads/avatars/' . $user['profile_pic']
-            : 'Images/default_avatar.svg',
+        'avatar'   => !empty($user['id']) ? 'avatar.php?user_id=' . (int)$user['id'] : 'Images/default_avatar.svg',
         'role'     => !empty($user['role']) ? $user['role'] : 'user',
     ];
 } catch (PDOException $e) {
@@ -41,9 +39,7 @@ try {
             $response = [
                 'loggedIn' => true,
                 'username' => $user['username'],
-                'avatar'   => !empty($user['profile_pic'])
-                    ? 'uploads/avatars/' . $user['profile_pic']
-                    : 'Images/default_avatar.svg',
+                'avatar'   => !empty($_SESSION['user_id']) ? 'avatar.php?user_id=' . (int)$_SESSION['user_id'] : 'Images/default_avatar.svg',
                 'role'     => 'user',
             ];
         }

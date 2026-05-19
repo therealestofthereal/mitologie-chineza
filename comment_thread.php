@@ -82,9 +82,11 @@ function renderCommentRow(array $row, array $children, int $depth = 0, bool $sho
     $msgHtml  = nl2br($message);
     $time     = date('d M Y, H:i', strtotime($row['submitted_at']));
     $edited   = $row['edited_at'] ? ' <span class="edited-tag">(editat)</span>' : '';
-    $avatar   = !empty($row['profile_pic'])
-                ? 'uploads/avatars/' . htmlspecialchars($row['profile_pic'])
-                : 'Images/default_avatar.svg';
+    if (!empty($row['user_id'])) {
+        $avatar = 'avatar.php?user_id=' . (int)$row['user_id'];
+    } else {
+        $avatar = 'Images/default_avatar.svg';
+    }
     $likeCount = (int)$row['like_count'];
     $liked     = (int)$row['liked_by_user'] === 1;
     $likeClass = $liked ? ' liked' : '';

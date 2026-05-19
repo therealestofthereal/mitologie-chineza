@@ -123,9 +123,19 @@ if (extension_loaded('gd')) {
 
 // update db
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ? WHERE id = ?");
-$stmt->execute([$filename, $_SESSION['user_id']]);
 
+// attempt to read the saved file into a blob so we can fall back to DB storage
+$blob = null;
+if (file_exists($dest)) {
+    $blob = file_get_contents($dest);
+} elseif (is_readable($file['tmp_name'])) {
+    $blob = file_get_contents($file['tmp_name']);
+}
+
+$stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ?, profile_blob = ?, profile_blob_mime = ? WHERE id = ?");
+$stmt->execute([$filename, $blob, $realType, $_SESSION['user_id']]);
+
+// keep session value for quick UI updates (clients use avatar.php which reads DB if needed)
 $_SESSION['profile_pic'] = $filename;
 
 header('Location: profile.php?success=1');

@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS `site_users` (
   `email` VARCHAR(255) NOT NULL UNIQUE,
   `password` VARCHAR(255) NOT NULL,
   `profile_pic` VARCHAR(255) DEFAULT NULL,
+  `profile_blob` MEDIUMBLOB DEFAULT NULL,
+  `profile_blob_mime` VARCHAR(50) DEFAULT NULL,
   `role` VARCHAR(32) NOT NULL DEFAULT 'user',
   `quiz_highscore` INT NOT NULL DEFAULT 0,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
