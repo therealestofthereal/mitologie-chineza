@@ -132,8 +132,19 @@ if (file_exists($dest)) {
     $blob = file_get_contents($file['tmp_name']);
 }
 
-$stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ?, profile_blob = ?, profile_blob_mime = ? WHERE id = ?");
-$stmt->execute([$filename, $blob, $realType, $_SESSION['user_id']]);
+try {
+    $stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ?, profile_blob = ?, profile_blob_mime = ? WHERE id = ?");
+    $stmt->execute([$filename, $blob, $realType, $_SESSION['user_id']]);
+} catch (PDOException $e) {
+    // If the DB doesn't have the new columns yet (migration not applied), fall back to updating only profile_pic
+    $msg = $e->getMessage();
+    if (stripos($msg, 'profile_blob') !== false || stripos($msg, 'Unknown column') !== false) {
+        $stmt = $pdo->prepare("UPDATE site_users SET profile_pic = ? WHERE id = ?");
+        $stmt->execute([$filename, $_SESSION['user_id']]);
+    } else {
+        throw $e;
+    }
+}
 
 // keep session value for quick UI updates (clients use avatar.php which reads DB if needed)
 $_SESSION['profile_pic'] = $filename;
