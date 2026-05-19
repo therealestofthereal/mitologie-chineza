@@ -94,7 +94,7 @@ function renderCommentRow(array $row, array $children, int $depth = 0, bool $sho
     if ($currentUserId && $currentUserId == $row['user_id']) {
         $editBtn = '<button class="comment-edit-btn" data-id="'.$id.'">✏️ Editează</button>';
     }
-    if ($currentRole === 'admin') {
+    if ($currentRole === 'admin' || ($currentUserId && $currentUserId == $row['user_id'])) {
         $deleteBtn = '<button class="comment-delete-btn" data-id="'.$id.'">🗑 Șterge</button>';
     }
 

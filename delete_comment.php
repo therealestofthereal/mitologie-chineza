@@ -9,7 +9,7 @@ if (!validate_csrf_token($token)) {
     exit;
 }
 
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'error' => 'neautorizat']);
     exit;
 }
@@ -25,6 +25,24 @@ if (!$id) {
 }
 
 try {
+    $stmt = $pdo->prepare("SELECT user_id FROM messages WHERE id = ?");
+    $stmt->execute([$id]);
+    $comment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$comment) {
+        echo json_encode(['success' => false, 'error' => 'comentariu inexistent']);
+        exit;
+    }
+
+    $commentOwnerId = isset($comment['user_id']) ? (int)$comment['user_id'] : 0;
+    $currentUserId = (int)$_SESSION['user_id'];
+    $currentRole = $_SESSION['role'] ?? 'user';
+
+    if ($commentOwnerId !== $currentUserId && $currentRole !== 'admin') {
+        echo json_encode(['success' => false, 'error' => 'neautorizat']);
+        exit;
+    }
+
     $stmt = $pdo->prepare("DELETE FROM messages WHERE id = ?");
     $stmt->execute([$id]);
 
