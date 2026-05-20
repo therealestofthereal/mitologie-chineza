@@ -335,7 +335,6 @@ require_once __DIR__ . '/csrf.php';
 </div>
 
 <footer>
-  <p>Site făcut de</p>
   <p>Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
 </footer>
 
