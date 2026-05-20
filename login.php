@@ -5,8 +5,6 @@ require_once __DIR__ . '/csrf.php';
 
 <!DOCTYPE html>
 <html>
-<!DOCTYPE html>
-<html>
 <meta charset="UTF-8">
 <head>
   <link rel="stylesheet" href="style.css">
