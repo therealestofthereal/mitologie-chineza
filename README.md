@@ -81,9 +81,10 @@ Tabele principale:
 - Codul aplicației este scris de autor.
 - Pentru unele imagini folosite în pagină s-au utilizat resurse publice sau gratuite.
 - Structura infoboxurilor și prezentarea unor fișe informative au fost inspirate din stilul Wikipedia, dar implementarea aplicației și logica rămân realizate de autor.
-- Au fost consultate tutoriale, documentație și exemple de cod pentru a înțelege și a implementa unele funcționalități PHP, MySQL și JavaScript.
-- Autorul a folosit resurse de suport tehnic pentru a înțelege mai bine configurarea deploy-ului pe Railway.
-- O parte din textul paginilor a fost adaptată în funcție de resursele consultate.
+- Au fost consultate tutoriale, documentație și exemple de cod pentru a înțelege și a implementa une funcționalități PHP, MySQL și JavaScript.
+- Autorul a folosit un asistent AI pentru pregătirea deploy-ului pe Railway și pentru debugging legat de rularea site-ului pe Railway.
+- O parte din textul paginilor a fost generată cu ajutorul AI.
+- AI a contribuit și la soluția de gestionare a avatarurilor pe Railway, în timp ce funcționalitatea a fost testată și creată local de autor.
 - Implementarea principală, logica aplicației și structura de bază rămân responsabilitatea autorului.
 
 ## NOTĂ
