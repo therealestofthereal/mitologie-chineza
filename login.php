@@ -342,7 +342,6 @@ require_once __DIR__ . '/csrf.php';
 <div class="sticky">
     <p style="padding:0%; font-family:'Times New Roman', Times, serif">Site făcut de</p>
 </div>
-<p style="background-color:#982000;margin:0%;padding:0%;text-align: center; color:white; font-family:'Times New Roman', Times, serif;">Ursulescu Florin-Alexandru, cl. XII-a A, Liceul Atanasie Marienescu</p>
 
 <script>
 function switchTab(tab, event) {
